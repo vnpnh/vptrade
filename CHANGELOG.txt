@@ -1,0 +1,12 @@
+====================================================
+vptrade/Python 0.0.1 - Release Notes & Changes
+====================================================
+
+
+0.0.1 (10/05/2022)
+------------------
+- First Release
+- Moving Average (SMA, EMA, LWMA, SMMA, CMA)
+- RSI
+- Bollinger Bands
+
