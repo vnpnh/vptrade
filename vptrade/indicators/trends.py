@@ -1,20 +1,27 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import pandas as pd
 import numpy as np
 from vptrade.plots.visualize import show_plot
+from vptrade.base import VPTradeBase
 
 
 @dataclass
-class Trend:
+class Trend(VPTradeBase):
     """
     Trend Indicator
     - Moving Average (sma, ema, cma, smma, lwma)
     - Bollinger band
     """
-    data: pd
+    data: pd = field(default=None)
+    path: str = field(default=None)
+
+    def __post_init__(self):
+        if self.path is not None:
+            VPTradeBase(path=self.path)
+            self.read_data()
 
     @show_plot('sma')
-    def sma(self, period: int, volume: str, show: bool = False, save: str = "sma_img.png") -> list:
+    def sma(self, period: int, volume: str, show: str = "single", save: str = "sma_img.png") -> list:
         """
         Simple Moving Average
         :param save:
@@ -29,7 +36,7 @@ class Trend:
         return data
 
     @show_plot('ema')
-    def ema(self, period: int, volume: str, show: bool = False, save: str = "ema_img.png") -> list:
+    def ema(self, period: int, volume: str, show: str = "single", save: str = "ema_img.png") -> list:
         """
         Exponential Moving Average
         :param show:
@@ -44,7 +51,7 @@ class Trend:
         return data
 
     @show_plot('cma')
-    def cma(self, period: int, volume: str, show: bool = False, save: str = "cma_img.png") -> list:
+    def cma(self, period: int, volume: str, show: str = "single", save: str = "cma_img.png") -> list:
         """
         Cumulative Moving Average
         :param period:
@@ -58,7 +65,7 @@ class Trend:
         return data
 
     @show_plot("smma")
-    def smma(self, period: int, volume: str, show: bool = False, save: str = "cma_img.png") -> list:
+    def smma(self, period: int, volume: str, show: str = "single", save: str = "cma_img.png") -> list:
         """
         Smoothed Moving Average
         :param show:
@@ -67,13 +74,13 @@ class Trend:
         :param volume:
         :return:
         """
-        ema = self.ema(period, volume, show=False)
+        ema = self.ema(period, volume, show=show)
         smoothed = (ema * 2) - 1
         smoothed.rename(columns={"EMA30": 'SMMA' + str(period)}, inplace=True)
         return smoothed
 
     @show_plot("lwma")
-    def lwma(self, period: int, volume: str, show: bool = False, save: str = "cma_img.png"):
+    def lwma(self, period: int, volume: str, show: str = "single", save: str = "cma_img.png"):
         """
         Linear-Weighted Moving Average
         :param save:
@@ -90,7 +97,7 @@ class Trend:
         return self.data
 
     @show_plot("bollinger_band")
-    def bollinger_bands(self, period: int, volume: str, show: bool = False, save: str = "bolband_img.png") -> list:
+    def bollinger_bands(self, period: int, volume: str, show: str = "single", save: str = "bolband_img.png") -> list:
         """
         Bollinger Bands
         :param period:

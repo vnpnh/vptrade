@@ -1,6 +1,13 @@
 ====================================================
-vptrade/Python 0.0.1 - Release Notes & Changes
+vptrade/Python 0.0.2 - Release Notes & Changes
 ====================================================
+
+0.0.2 (12/05/2022)
+------------------
+- Added VPTradeBase Class
+- Added multiple indicators in one chart
+- Added crossover moving average strategy and signal
+- Improve single visualization for moving averages code
 
 
 0.0.1 (10/05/2022)

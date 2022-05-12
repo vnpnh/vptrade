@@ -12,7 +12,7 @@ README = (HERE / "README.md").read_text()
 setup(
     name='vptrade',
     version=str(version.VERSION_TEXT),
-    packages=['vptrade', 'vptrade.indicators', 'vptrade.plots'],
+    packages=['vptrade', 'vptrade.indicators', 'vptrade.plots', 'vptrade.strategies'],
     url='https://github.com/vnpnh/vptrade',
     license='MIT',
     keywords=["technical analysis", "ta", "trading tools", "finance", "trading", "analysis"],

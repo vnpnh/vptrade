@@ -13,12 +13,13 @@ vptrade is a technical indicators trading tools can be used to all instruments.
 
 - Trends Indicator 
 - Oscillators Indicator
+- Trading Strategies and Signal
 
 
 
 ## Installation
 
-Instal this package with pip
+Install this package with pip
 
 ```bash
   pip install vptrade
@@ -64,7 +65,20 @@ data = pd.read_csv(r'YOUR PATH\TSLA.csv',
 trend = Trend(data)
 bollinger = trend.bollinger_bands(period=30, volume="Close", show=True, save="bolinger_band.png")
 ```
+## Strategy
+moving average strategy
+```python
+from vptrade.indicators.trends import Trend
+from vptrade.strategies.moving_average import MovingAverageStrategy
 
+trend = Trend(path=r'C:\Users\forst\Downloads\TSLA.csv')
+ema_14 = trend.ema(period=20, volume="Close")
+ema_100 = trend.ema(period=100, volume="Close")
+ema_200 = trend.ema(period=200, volume="Close")
+
+MA = MovingAverageStrategy()
+signal = MA.crossover([ema_14, ema_100, ema_200], show="strategy")
+```
 
 ## Support
 

@@ -8,7 +8,7 @@ class Oscillator:
     data: pd
 
     @show_plot("rsi")
-    def rsi(self, period: int, volume: str, show: bool = False, save: str = "rsi_img.png") -> list:
+    def rsi(self, period: int, volume: str, show: str = "single", save: str = "rsi_img.png") -> list:
         """
         Relative Strength Index
         :param period:
